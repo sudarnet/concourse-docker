@@ -8,8 +8,7 @@ RUN tar xzf /tmp/*tgz -C /usr/local
 FROM ubuntu
 
 # enable DNS proxy to support Docker's 127.x.x.x DNS server
-ENV CONCOURSE_GARDEN_DNS_PROXY_ENABLE         true
-ENV CONCOURSE_WORKER_GARDEN_DNS_PROXY_ENABLE  true
+ENV CONCOURSE_CONTAINERD_DNS_PROXY_ENABLE true
 
 # auto-wire work dir for 'worker' and 'quickstart'
 ENV CONCOURSE_WORK_DIR                /worker-state
