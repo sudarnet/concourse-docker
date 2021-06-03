@@ -44,6 +44,8 @@ services:
     stop_signal: SIGUSR2
     environment:
       CONCOURSE_TSA_HOST: web:2222
+      # enable DNS proxy to support Docker's 127.x.x.x DNS server
+      CONCOURSE_CONTAINERD_DNS_PROXY_ENABLE: "true"
     logging:
       driver: "json-file"
       options:
