@@ -14,7 +14,8 @@ ENV CONCOURSE_WORKER_WORK_DIR         /worker-state
 # volume for non-aufs/etc. mount for baggageclaim's driver
 VOLUME /worker-state
 
-RUN apt-get update && apt-get install -y \
+RUN apt update && apt upgrade -y -o Dpkg::Options::="--force-confdef"
+RUN apt update && apt install -y \
     btrfs-tools \
     ca-certificates \
     dumb-init \
