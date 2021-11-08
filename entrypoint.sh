@@ -1,4 +1,9 @@
 #!/bin/sh
+[ "${CONCOURSE_RUNTIME}" == "containerd" ] && \
+[ $(mount | grep ' /sys/fs/cgroup ' | grep cgroup2 | wc -l) -eq 1 ] && \
+mkdir /sys/fs/cgroup/entrypoint && \
+echo 1 > /sys/fs/cgroup/entrypoint/cgroup.procs
+
 CONCOURSE_SESSION_SIGNING_KEY=${CONCOURSE_SESSION_SIGNING_KEY:-/concourse-keys/session_signing_key}
 [ -f $CONCOURSE_SESSION_SIGNING_KEY ] && export CONCOURSE_SESSION_SIGNING_KEY
 CONCOURSE_TSA_AUTHORIZED_KEYS=${CONCOURSE_TSA_AUTHORIZED_KEYS:-/concourse-keys/authorized_worker_keys}
