@@ -1,5 +1,6 @@
 #!/bin/sh
-[ "${CONCOURSE_RUNTIME}" = "containerd" ] && \
+
+[ "${CONCOURSE_RUNTIME}" = "containerd" ] || [ "${CONCOURSE_WORKER_RUNTIME}" = "containerd" ] && \
 [ "$(mount | grep ' /sys/fs/cgroup ' | grep -c cgroup2)" -eq 1 ] && \
 mkdir /sys/fs/cgroup/entrypoint && \
 echo 1 > /sys/fs/cgroup/entrypoint/cgroup.procs
