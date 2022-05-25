@@ -17,7 +17,7 @@ Concourse worker can be run with multiple [container runtimes](https://concourse
 * [Guardian](https://github.com/cloudfoundry/guardian)
 * [Houdini](https://github.com/vito/houdini)
 
-While adding the `CONCOURSE_*` environment variables for worker, please be mindful to configure the desired [container runtime](https://concourse-ci.org/concourse-worker) appropriately.
+While adding the `CONCOURSE_*` environment variables for worker in `docker-compose.yml`, please be mindful to configure the desired [container runtime](https://concourse-ci.org/concourse-worker.html#configuring-runtimes) appropriately.
 
 See [the Concourse install docs](https://concourse-ci.org/install.html) for more
 information on deploying and managing Concourse - the Docker repository just
