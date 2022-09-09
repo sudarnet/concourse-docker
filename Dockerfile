@@ -1,4 +1,4 @@
-FROM ubuntu:bionic AS ubuntu
+FROM ubuntu:jammy AS ubuntu
 
 FROM ubuntu AS assets
 COPY ./linux-rc/*.tgz /tmp
@@ -16,7 +16,7 @@ VOLUME /worker-state
 
 RUN apt update && apt upgrade -y -o Dpkg::Options::="--force-confdef"
 RUN apt update && apt install -y \
-    btrfs-tools \
+    btrfs-progs \
     ca-certificates \
     dumb-init \
     iproute2 \
