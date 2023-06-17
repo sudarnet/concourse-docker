@@ -40,7 +40,8 @@ services:
           - traefik.http.middlewares.https-redirect.redirectscheme.permanent=true
           - traefik.http.routers.ci-https.tls.certresolver=le
     command: web
-    privileged: true
+    cap_add:
+      - SYS_ADMIN
     depends_on: [concourse-db]
     volumes: ["./keys/web:/concourse-keys"]
     environment:
@@ -74,7 +75,8 @@ services:
           placement:
               constraints: [node.labels.sudarnet.allow.concourse == true]
     command: worker
-    privileged: true
+    cap_add:
+      - SYS_ADMIN
     depends_on: [web]
     environment:
       CONCOURSE_TSA_HOST: web:2222
