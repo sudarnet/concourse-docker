@@ -55,7 +55,7 @@ services:
       CONCOURSE_LOG_LEVEL: debug
       CONCOURSE_EXTERNAL_URL: https://ci.sudarnet.in
       CONCOURSE_ADD_LOCAL_USER: asuda:vasuda
-      CONCOURSE_MAIN_TEAM_LOCAL_USER: sudarnet
+      CONCOURSE_MAIN_TEAM_LOCAL_USER: asuda
       CONCOURSE_CLUSTER_NAME: sudarnet
     logging:
       driver: "json-file"
