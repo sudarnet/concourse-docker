@@ -22,7 +22,7 @@ services:
       - traefik-public
   web:
     # image: asudarsanan/concourse:7.9.1-suda
-    image: concourse/concourse
+    image: concourse/dev
     container_name: concourse
     deploy:
           mode: replicated
@@ -66,7 +66,7 @@ services:
 
   worker:
     #image: asudarsanan/concourse:7.9.1-suda
-    image: concourse/concourse
+    image: concourse/dev
     container_name: concourse
     deploy:
           mode: replicated
@@ -79,7 +79,7 @@ services:
     environment:
       CONCOURSE_TSA_HOST: web:2222
       # enable DNS proxy to support Docker's 127.x.x.x DNS server
-      CONCOURSE_GARDEN_DNS_PROXY_ENABLE: "true"
+      # CONCOURSE_GARDEN_DNS_PROXY_ENABLE: "true"
       CONCOURSE_TSA_PUBLIC_KEY: /concourse-keys/tsa_host_key.pub
       CONCOURSE_TSA_WORKER_PRIVATE_KEY: /concourse-keys/worker_key
     volumes: ["./keys/worker:/concourse-keys"]
