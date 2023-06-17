@@ -84,7 +84,10 @@ services:
       # CONCOURSE_GARDEN_DNS_PROXY_ENABLE: "true"
       CONCOURSE_TSA_PUBLIC_KEY: /concourse-keys/tsa_host_key.pub
       CONCOURSE_TSA_WORKER_PRIVATE_KEY: /concourse-keys/worker_key
-    volumes: ["./keys/worker:/concourse-keys"]
+    volumes: 
+    - ./keys/worker:/concourse-keys
+    - /sys/fs/cgroup:/sys/fs/cgroup:rw
+
     logging:
       driver: "json-file"
       options:
