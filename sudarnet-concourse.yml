@@ -77,6 +77,7 @@ services:
     command: worker
     cap_add:
       - SYS_ADMIN
+      - NET_ADMIN
     depends_on: [web]
     environment:
       CONCOURSE_TSA_HOST: web:2222
@@ -92,6 +93,7 @@ services:
       CONCOURSE_TSA_WORKER_PRIVATE_KEY: /concourse-keys/worker_key
     volumes: 
     - ./keys/worker:/concourse-keys
+
     logging:
       driver: "json-file"
       options:
