@@ -21,7 +21,8 @@ services:
     networks:
       - traefik-public
   web:
-    image: asudarsanan/concourse:7.9.1-suda
+    # image: asudarsanan/concourse:7.9.1-suda
+    image: concourse/concourse
     container_name: concourse
     deploy:
           mode: replicated
@@ -64,7 +65,8 @@ services:
       - traefik-public
 
   worker:
-    image: asudarsanan/concourse:7.9.1-suda
+    #image: asudarsanan/concourse:7.9.1-suda
+    image: concourse/concourse
     container_name: concourse
     deploy:
           mode: replicated
