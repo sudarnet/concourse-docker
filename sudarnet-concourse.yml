@@ -1,0 +1,93 @@
+version: '3'
+
+services:
+  concourse-db:
+    container_name: concourse-db
+    image: postgres
+    deploy:
+          placement:
+              constraints: [node.labels.sudarnet.allow.concourse == true]
+    environment:
+      POSTGRES_DB: concourse
+      POSTGRES_USER: concourse_user
+      POSTGRES_PASSWORD: concourse_pass
+    volumes:
+      - /mnt/sudarnet/sudarnet-concourse/pg_data:/var/lib/postgresql/data
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "10m"
+    networks:
+      - traefik-public
+  web:
+    image: asudarsanan/concourse:7.9.1-suda
+    container_name: concourse
+    deploy:
+          mode: replicated
+          replicas: 1
+          placement:
+              constraints: [node.labels.sudarnet.allow.concourse == true]
+          labels:
+          # Traefik configuration, Hostname needs to be changed
+          - traefik.enable=true
+          - traefik.http.services.ci-https.loadbalancer.server.port=8080
+          - traefik.http.routers.ci-https.rule=Host(`ci.sudarnet.in`)
+          - traefik.http.routers.ci-https.entrypoints=https
+          - traefik.http.routers.ci-https.tls=true
+          - traefik.http.middlewares.https-redirect.redirectscheme.scheme=https
+          - traefik.http.middlewares.https-redirect.redirectscheme.permanent=true
+          - traefik.http.routers.ci-https.tls.certresolver=le
+    command: web
+    privileged: true
+    depends_on: [concourse-db]
+    volumes: ["./keys/web:/concourse-keys"]
+    environment:
+      CONCOURSE_POSTGRES_HOST: db
+      CONCOURSE_POSTGRES_USER: concourse_user
+      CONCOURSE_POSTGRES_PASSWORD: concourse_pass
+      CONCOURSE_POSTGRES_DATABASE: concourse
+      CONCOURSE_LOG_LEVEL: debug
+      CONCOURSE_EXTERNAL_URL: https://ci.sudarnet.in
+      CONCOURSE_ADD_LOCAL_USER: asuda:vasuda
+      CONCOURSE_MAIN_TEAM_LOCAL_USER: sudarnet
+      CONCOURSE_CLUSTER_NAME: sudarnet
+      CONCOURSE_ENABLE_PIPELINE_INSTANCES: "true"
+      CONCOURSE_ENABLE_ACROSS_STEP: "true"
+      CONCOURSE_ENABLE_CACHE_STREAMED_VOLUMES: "true"
+      CONCOURSE_ENABLE_RESOURCE_CAUSALITY: "true"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "10m"
+    networks:
+      - traefik-public
+
+  worker:
+    image: asudarsanan/concourse:7.9.1-suda
+    container_name: concourse
+    deploy:
+          mode: replicated
+          replicas: 1
+          placement:
+              constraints: [node.labels.sudarnet.allow.concourse == true]
+    command: worker
+    privileged: true
+    depends_on: [web]
+    environment:
+      CONCOURSE_TSA_HOST: web:2222
+      # enable DNS proxy to support Docker's 127.x.x.x DNS server
+      CONCOURSE_GARDEN_DNS_PROXY_ENABLE: "true"
+    volumes: ["./keys/worker:/concourse-keys"]
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "10m"
+    networks:
+      - traefik-public
+
+networks:
+  traefik-public:
+    external: true
