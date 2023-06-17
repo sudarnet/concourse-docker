@@ -43,7 +43,7 @@ services:
     depends_on: [concourse-db]
     volumes: ["./keys/web:/concourse-keys"]
     environment:
-      CONCOURSE_POSTGRES_HOST: db
+      CONCOURSE_POSTGRES_HOST: concourse-db
       CONCOURSE_POSTGRES_USER: concourse_user
       CONCOURSE_POSTGRES_PASSWORD: concourse_pass
       CONCOURSE_POSTGRES_DATABASE: concourse
