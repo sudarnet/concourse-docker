@@ -50,7 +50,7 @@ services:
           # - traefik.http.routers.ci-worker-https.tls=true
           # - traefik.http.routers.ci-worker-https.tls.certresolver=le
           # - traefik.http.services.ci-worker-https.loadbalancer.server.scheme=https
-          - traefik.docker.network=traefik-public
+          # - traefik.docker.network=traefik-public
 
     command: web
     cap_add:
