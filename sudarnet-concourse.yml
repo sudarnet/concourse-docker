@@ -23,9 +23,9 @@ services:
   web:
     # image: asudarsanan/concourse:7.9.1-suda
     image: concourse/dev
-    ports:
-    - 2222:2222
-    - 8080:8080
+    # ports:
+    # - 2222:2222
+    # - 8080:8080
     deploy:
           mode: replicated
           replicas: 1
