@@ -57,6 +57,10 @@ services:
       CONCOURSE_ADD_LOCAL_USER: asuda:vasuda
       CONCOURSE_MAIN_TEAM_LOCAL_USER: asuda
       CONCOURSE_CLUSTER_NAME: sudarnet
+      CONCOURSE_VAULT_URL: https://secure.sudarnet.in
+      CONCOURSE_VAULT_AUTH_BACKEND_MAX_TTL: 1h
+      CONCOURSE_VAULT_AUTH_BACKEND: "approle"
+      CONCOURSE_VAULT_AUTH_PARAM: "role_id:0b88c92a-5d71-39a1-a643-23368c92ce07,secret_id:45815736-e66d-3fe8-178d-91f436f0f3b9"
     logging:
       driver: "json-file"
       options:
