@@ -90,6 +90,7 @@ services:
       # enable DNS proxy to support Docker's 127.x.x.x DNS server
       # CONCOURSE_GARDEN_DNS_PROXY_ENABLE: "true"
       CONCOURSE_CONTAINERD_DNS_PROXY_ENABLE: "true"
+      CONCOURSE_CONTAINERD_ALLOW_HOST_ACCESS: "true"
       CONCOURSE_RUNTIME: containerd
       CONCOURSE_BAGGAGECLAIM_DRIVER: overlay
       CONCOURSE_TSA_PUBLIC_KEY: /concourse-keys/tsa_host_key.pub
