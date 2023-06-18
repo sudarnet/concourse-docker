@@ -85,7 +85,7 @@ services:
       - NET_ADMIN
     depends_on: [web]
     environment:
-      CONCOURSE_TSA_HOST: web:2222
+      CONCOURSE_TSA_HOST: sudarnet-concourse_web:2222
       CONCOURSE_LOG_LEVEL: debug
       # enable DNS proxy to support Docker's 127.x.x.x DNS server
       # CONCOURSE_GARDEN_DNS_PROXY_ENABLE: "true"
