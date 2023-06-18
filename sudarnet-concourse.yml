@@ -42,8 +42,10 @@ services:
 
           - traefik.enable=true
           - traefik.http.services.ci-https.loadbalancer.server.port=8080
+          - traefik.http.routers.ci-https.service=web
           - traefik.http.routers.ci-https.rule=Host(`ci.sudarnet.in`)
           - traefik.http.services.web2.loadbalancer.server.port=2222
+          - traefik.http.routers.web2.service=web
           - traefik.http.routers.web2.rule=Host(`ci.sudarnet.in`) && PathPrefix(`/ssh`)
           - traefik.http.routers.web2.tls=true
           - traefik.http.routers.web2.tls.certresolver=le
