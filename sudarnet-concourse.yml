@@ -23,9 +23,7 @@ services:
   web:
     # image: asudarsanan/concourse:7.9.1-suda
     image: concourse/dev
-    # ports:
-    # - 2222:2222
-    # - 8080:8080
+    # ports: [2222:2222]
     deploy:
           mode: replicated
           replicas: 1
@@ -37,25 +35,19 @@ services:
           - traefik.http.services.ci-https.loadbalancer.server.port=8080
           - traefik.http.routers.ci-https.rule=Host(`ci.sudarnet.in`)
           - traefik.http.routers.ci-https.entrypoints=https
-          # - traefik.http.routers.ci-https.service=ci-https
           - traefik.http.routers.ci-https.tls=true
-          - traefik.http.services.ci-https.loadbalancer.server.scheme=https
           - traefik.http.middlewares.https-redirect.redirectscheme.scheme=https
           - traefik.http.middlewares.https-redirect.redirectscheme.permanent=true
           - traefik.http.routers.ci-https.tls.certresolver=le
-          # - traefik.http.services.ci-worker-https.loadbalancer.server.port=2222
-          # - traefik.http.routers.ci-worker-https.rule=Host(`ci-worker.sudarnet.in`)
-          # - traefik.http.routers.ci-worker-https.entrypoints=https
-          # - traefik.http.routers.ci-worker-https.service=ci-worker-https
-          # - traefik.http.routers.ci-worker-https.tls=true
-          # - traefik.http.routers.ci-worker-https.tls.certresolver=le
-          # - traefik.http.services.ci-worker-https.loadbalancer.server.scheme=https
-          # - traefik.docker.network=traefik-public
+          - traefik.http.services.ci-worker-https.loadbalancer.server.port=2222
+          - traefik.http.routers.ci-worker-https.rule=Host(`ci-worker.sudarnet.in`)
+          - traefik.http.routers.ci-worker-https.entrypoints=https
+          - traefik.http.routers.ci-worker-https.tls=true
+          - traefik.http.routers.ci-worker-https.tls.certresolver=le
 
     command: web
     cap_add:
       - SYS_ADMIN
-      - NET_ADMIN
     depends_on: [concourse-db]
     volumes: ["./keys/web:/concourse-keys"]
     environment:
