@@ -81,6 +81,7 @@ services:
     command: worker
     cap_add:
       - SYS_ADMIN
+      - FOWNER
       - NET_ADMIN
     depends_on: [web]
     environment:
