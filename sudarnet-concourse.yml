@@ -51,6 +51,7 @@ services:
           - "traefik.tcp.services.concourse-ssh.loadbalancer.server.port=2222"
           - "traefik.tcp.routers.concourse-ssh.service=concourse-ssh"
           - "traefik.http.routers.concourse-web.tls=true" 
+          - "traefik.http.routers.concourse-ssh.tls=true"
           - "traefik.tcp.routers.concourse-web.tls.certresolver=le"
           - "traefik.tcp.routers.concourse-ssh.entrypoints=https"
           # - traefik.enable=true
