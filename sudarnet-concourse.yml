@@ -52,6 +52,7 @@ services:
           - "traefik.http.routers.concourse-ssh.service=concourse-ssh"
           - "traefik.http.routers.concourse-web.tls=true" 
           - "traefik.http.routers.concourse-web.tls.certresolver=le"
+          - "traefik.http.routers.concourse-ssh.entrypoints=https"
           # - traefik.enable=true
           # - traefik.http.services.ci-worker-https.loadbalancer.server.port=8080
           # - traefik.http.routers.ci-worker-https.service=ci-worker-https
