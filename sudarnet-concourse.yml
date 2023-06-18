@@ -42,7 +42,7 @@ services:
 
           - traefik.enable=true
           - traefik.http.services.ci-worker-https.loadbalancer.server.port=8080
-          - traefik.http.routers.ci-worker-https.service=ci-worker
+          - traefik.http.routers.ci-worker-https.service=ci-worker-https
           - traefik.http.routers.ci-worker-https.rule=Host(`ci-worker.sudarnet.in`)
           - traefik.http.services.web2.loadbalancer.server.port=2222
           - traefik.http.routers.web2.service=web2
