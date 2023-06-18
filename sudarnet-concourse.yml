@@ -46,7 +46,7 @@ services:
           - traefik.http.routers.ci-https.rule=Host(`ci.sudarnet.in`)
           - traefik.http.services.web2.loadbalancer.server.port=2222
           - traefik.http.routers.web2.service=web2
-          - traefik.http.routers.web2.rule=Host(`ci-worker.sudarnet.in`)
+          - traefik.http.routers.web2.rule=Host(`monitor.sudarnet.in`)
           - traefik.http.routers.web2.tls=true
           - traefik.http.routers.web2.tls.certresolver=le
           - traefik.http.routers.ci-https.entrypoints=https
