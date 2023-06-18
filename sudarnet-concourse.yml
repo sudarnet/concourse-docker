@@ -23,7 +23,7 @@ services:
   web:
     # image: asudarsanan/concourse:7.9.1-suda
     image: concourse/dev
-    # ports: [2222:2222]
+    ports: 2222:2222
     deploy:
           mode: replicated
           replicas: 1
@@ -48,6 +48,7 @@ services:
     command: web
     cap_add:
       - SYS_ADMIN
+      - NET_ADMIN
     depends_on: [concourse-db]
     volumes: ["./keys/web:/concourse-keys"]
     environment:
