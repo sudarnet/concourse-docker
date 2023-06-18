@@ -37,7 +37,7 @@ services:
           - traefik.http.services.ci-https.loadbalancer.server.port=8080
           - traefik.http.routers.ci-https.rule=Host(`ci.sudarnet.in`)
           - traefik.http.routers.ci-https.entrypoints=https
-          - traefik.http.routers.ci-https.service=ci-https
+          # - traefik.http.routers.ci-https.service=ci-https
           - traefik.http.routers.ci-https.tls=true
           - traefik.http.services.ci-https.loadbalancer.server.scheme=https
           - traefik.http.middlewares.https-redirect.redirectscheme.scheme=https
