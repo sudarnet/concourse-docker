@@ -95,6 +95,7 @@ services:
       CONCOURSE_BAGGAGECLAIM_DRIVER: overlay
       CONCOURSE_TSA_PUBLIC_KEY: /concourse-keys/tsa_host_key.pub
       CONCOURSE_TSA_WORKER_PRIVATE_KEY: /concourse-keys/worker_key
+      CONCOURSE_WORK_DIR: /opt/concourse/worker
     volumes: 
     - ./keys/worker:/concourse-keys
     - /var/run/docker.sock:/var/run/docker.sock
