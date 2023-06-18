@@ -77,7 +77,7 @@ services:
           mode: replicated
           replicas: 1
           placement:
-              constraints: [node.labels.sudarnet.allow.concourse == true]
+              constraints: [node.labels.sudarnet.allow.concourse.worker == true]
     command: worker
     cap_add:
       - SYS_ADMIN
