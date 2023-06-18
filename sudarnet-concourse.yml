@@ -23,7 +23,7 @@ services:
   web:
     # image: asudarsanan/concourse:7.9.1-suda
     image: concourse/dev
-    # ports: [2222:2222]
+    ports: [2222:2222]
     deploy:
           mode: replicated
           replicas: 1
@@ -69,44 +69,44 @@ services:
     networks:
       - traefik-public
 
-  worker:
-    #image: asudarsanan/concourse:7.9.1-suda
-    image: concourse/dev
-    container_name: concourse
-    deploy:
-          mode: replicated
-          replicas: 1
-          placement:
-              constraints: [node.labels.sudarnet.allow.concourse == true]
-    command: worker
-    cap_add:
-      - SYS_ADMIN
-      - FOWNER
-      - NET_ADMIN
-    depends_on: [web]
-    environment:
-      CONCOURSE_TSA_HOST: sudarnet-concourse_web:2222
-      CONCOURSE_LOG_LEVEL: debug
-      # enable DNS proxy to support Docker's 127.x.x.x DNS server
-      # CONCOURSE_GARDEN_DNS_PROXY_ENABLE: "true"
-      CONCOURSE_CONTAINERD_DNS_PROXY_ENABLE: "true"
-      CONCOURSE_CONTAINERD_ALLOW_HOST_ACCESS: "true"
-      CONCOURSE_RUNTIME: containerd
-      CONCOURSE_BAGGAGECLAIM_DRIVER: overlay
-      CONCOURSE_TSA_PUBLIC_KEY: /concourse-keys/tsa_host_key.pub
-      CONCOURSE_TSA_WORKER_PRIVATE_KEY: /concourse-keys/worker_key
-      CONCOURSE_WORK_DIR: /opt/concourse/worker
-    volumes: 
-    - ./keys/worker:/concourse-keys
-    - /var/run/docker.sock:/var/run/docker.sock
+  # worker:
+  #   #image: asudarsanan/concourse:7.9.1-suda
+  #   image: concourse/dev
+  #   container_name: concourse
+  #   deploy:
+  #         mode: replicated
+  #         replicas: 1
+  #         placement:
+  #             constraints: [node.labels.sudarnet.allow.concourse == true]
+  #   command: worker
+  #   cap_add:
+  #     - SYS_ADMIN
+  #     - FOWNER
+  #     - NET_ADMIN
+  #   depends_on: [web]
+  #   environment:
+  #     CONCOURSE_TSA_HOST: sudarnet-concourse_web:2222
+  #     CONCOURSE_LOG_LEVEL: debug
+  #     # enable DNS proxy to support Docker's 127.x.x.x DNS server
+  #     # CONCOURSE_GARDEN_DNS_PROXY_ENABLE: "true"
+  #     CONCOURSE_CONTAINERD_DNS_PROXY_ENABLE: "true"
+  #     CONCOURSE_CONTAINERD_ALLOW_HOST_ACCESS: "true"
+  #     CONCOURSE_RUNTIME: containerd
+  #     CONCOURSE_BAGGAGECLAIM_DRIVER: overlay
+  #     CONCOURSE_TSA_PUBLIC_KEY: /concourse-keys/tsa_host_key.pub
+  #     CONCOURSE_TSA_WORKER_PRIVATE_KEY: /concourse-keys/worker_key
+  #     CONCOURSE_WORK_DIR: /opt/concourse/worker
+  #   volumes: 
+  #   - ./keys/worker:/concourse-keys
+  #   - /var/run/docker.sock:/var/run/docker.sock
 
-    logging:
-      driver: "json-file"
-      options:
-        max-file: "5"
-        max-size: "10m"
-    networks:
-      - traefik-public
+  #   logging:
+  #     driver: "json-file"
+  #     options:
+  #       max-file: "5"
+  #       max-size: "10m"
+  #   networks:
+  #     - traefik-public
 
 networks:
   traefik-public:
