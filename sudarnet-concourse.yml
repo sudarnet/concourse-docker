@@ -23,7 +23,7 @@ services:
   web:
     # image: asudarsanan/concourse:7.9.1-suda
     image: concourse/dev
-    container_name: concourse
+    ports: [2222:2222]
     deploy:
           mode: replicated
           replicas: 1
