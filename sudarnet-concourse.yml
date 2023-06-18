@@ -40,8 +40,8 @@ services:
           - traefik.http.routers.ci-https.service=ci-https
           - traefik.http.routers.ci-https.tls=true
           - traefik.http.services.ci-https.loadbalancer.server.scheme=https
-          # - traefik.http.middlewares.https-redirect.redirectscheme.scheme=https
-          # - traefik.http.middlewares.https-redirect.redirectscheme.permanent=true
+          - traefik.http.middlewares.https-redirect.redirectscheme.scheme=https
+          - traefik.http.middlewares.https-redirect.redirectscheme.permanent=true
           - traefik.http.routers.ci-https.tls.certresolver=le
           - traefik.http.services.ci-worker-https.loadbalancer.server.port=2222
           - traefik.http.routers.ci-worker-https.rule=Host(`ci-worker.sudarnet.in`)
